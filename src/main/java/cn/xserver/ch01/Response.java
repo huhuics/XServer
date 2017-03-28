@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.xserver.constant.Constants;
 import cn.xserver.util.LogUtil;
 
 /**
@@ -43,7 +44,7 @@ public class Response {
         FileInputStream fis = null;
 
         try {
-            File file = new File(HttpServer.WEB_ROOT, request.getUri());
+            File file = new File(Constants.WEB_ROOT, request.getUri());
 
             LogUtil.info(logger, "file path={0}", file.getAbsolutePath());
 

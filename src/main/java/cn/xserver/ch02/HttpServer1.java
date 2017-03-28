@@ -2,7 +2,7 @@
  * 深圳金融电子结算中心
  * Copyright (c) 1995-2017 All Rights Reserved.
  */
-package cn.xserver.ch01;
+package cn.xserver.ch02;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,18 +18,18 @@ import cn.xserver.constant.Constants;
 import cn.xserver.util.LogUtil;
 
 /**
- * 简单的web服务器
+ * 
  * @author HuHui
- * @version $Id: HttpServer.java, v 0.1 2017年3月27日 下午8:01:38 HuHui Exp $
+ * @version $Id: HttpServer1.java, v 0.1 2017年3月28日 上午10:02:24 HuHui Exp $
  */
-public class HttpServer {
+public class HttpServer1 {
 
-    private static final Logger logger   = LoggerFactory.getLogger(HttpServer.class);
+    private static final Logger logger   = LoggerFactory.getLogger(HttpServer1.class);
 
     private boolean             shutdown = false;
 
     public static void main(String[] args) {
-        HttpServer server = new HttpServer();
+        HttpServer1 server = new HttpServer1();
         server.await();
     }
 
@@ -61,7 +61,14 @@ public class HttpServer {
                 //创建response
                 Response response = new Response(output);
                 response.setRequest(request);
-                response.sendStaticResource();
+
+                if (request.getUri().startsWith("/servlet/")) {
+                    ServletProcessor1 processor = new ServletProcessor1();
+                    processor.process(request, response);
+                } else {
+                    StaticResourceProcessor processor = new StaticResourceProcessor();
+                    processor.process(request, response);
+                }
 
                 socket.close();
 
@@ -77,4 +84,5 @@ public class HttpServer {
         }
 
     }
+
 }
