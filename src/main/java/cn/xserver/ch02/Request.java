@@ -16,6 +16,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cn.xserver.util.LogUtil;
+
 /**
  * 请求类
  * @author HuHui
@@ -23,9 +28,11 @@ import javax.servlet.ServletRequest;
  */
 public class Request implements ServletRequest {
 
-    private InputStream input;
+    private static final Logger logger = LoggerFactory.getLogger(Request.class);
 
-    private String      uri;
+    private InputStream         input;
+
+    private String              uri;
 
     public Request(InputStream input) {
         this.input = input;
@@ -65,6 +72,8 @@ public class Request implements ServletRequest {
         }
 
         uri = parseUri(request.toString());
+
+        LogUtil.info(logger, "request.uri={0}", uri);
     }
 
     /** 

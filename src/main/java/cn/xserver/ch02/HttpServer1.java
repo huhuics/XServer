@@ -58,11 +58,13 @@ public class HttpServer1 {
                 Request request = new Request(input);
                 request.parse();
 
+                String uri = request.getUri();
+
                 //创建response
                 Response response = new Response(output);
                 response.setRequest(request);
 
-                if (request.getUri().startsWith("/servlet/")) {
+                if (uri != null && uri.startsWith("/servlet/")) {
                     ServletProcessor1 processor = new ServletProcessor1();
                     processor.process(request, response);
                 } else {
@@ -72,7 +74,6 @@ public class HttpServer1 {
 
                 socket.close();
 
-                String uri = request.getUri();
                 if (StringUtils.isNotEmpty(uri)) {
                     shutdown = uri.equals(Constants.SHUTDOWN_COMMAND);
                 }

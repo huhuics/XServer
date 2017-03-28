@@ -39,7 +39,7 @@ public class ServletProcessor1 {
             File classPath = new File(Constants.WEB_ROOT);
 
             String repository = (new URL("file", null, classPath.getCanonicalPath() + File.separator)).toString();
-
+            LogUtil.info(logger, "repository={0}", repository);
             urls[0] = new URL(null, repository, streamHandler);
             loader = new URLClassLoader(urls);
         } catch (Exception e) {
@@ -49,9 +49,11 @@ public class ServletProcessor1 {
         Class myClass = null;
 
         try {
-            myClass = loader.loadClass(servletName);
+            LogUtil.info(logger, "servletName={0}", servletName);
+            //            myClass = loader.loadClass(servletName);
+            myClass = Class.forName("cn.xserver.ch02.PrimitiveServlet");
         } catch (ClassNotFoundException e) {
-            LogUtil.error(e, logger, "创建servlet异常");
+            LogUtil.error(e, logger, "servlet类无法找到");
         }
 
         Servlet servlet = null;
