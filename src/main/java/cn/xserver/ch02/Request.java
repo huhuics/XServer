@@ -12,9 +12,13 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.AsyncContext;
+import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,9 +75,10 @@ public class Request implements ServletRequest {
             request.append((char) buffer[j]);
         }
 
+        LogUtil.info(logger, "request={0}", request.toString());
+
         uri = parseUri(request.toString());
 
-        LogUtil.info(logger, "request.uri={0}", uri);
     }
 
     /** 
@@ -303,6 +308,46 @@ public class Request implements ServletRequest {
     @Override
     public int getLocalPort() {
         return 0;
+    }
+
+    @Override
+    public long getContentLengthLong() {
+        return 0;
+    }
+
+    @Override
+    public ServletContext getServletContext() {
+        return null;
+    }
+
+    @Override
+    public AsyncContext startAsync() throws IllegalStateException {
+        return null;
+    }
+
+    @Override
+    public AsyncContext startAsync(ServletRequest servletRequest, ServletResponse servletResponse) throws IllegalStateException {
+        return null;
+    }
+
+    @Override
+    public boolean isAsyncStarted() {
+        return false;
+    }
+
+    @Override
+    public boolean isAsyncSupported() {
+        return false;
+    }
+
+    @Override
+    public AsyncContext getAsyncContext() {
+        return null;
+    }
+
+    @Override
+    public DispatcherType getDispatcherType() {
+        return null;
     }
 
 }

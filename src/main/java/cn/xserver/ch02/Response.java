@@ -1,5 +1,5 @@
 /**
- * 深圳金融电子结算中心
+S * 深圳金融电子结算中心
  * Copyright (c) 1995-2017 All Rights Reserved.
  */
 package cn.xserver.ch02;
@@ -187,6 +187,10 @@ public class Response implements ServletResponse {
     @Override
     public Locale getLocale() {
         return null;
+    }
+
+    @Override
+    public void setContentLengthLong(long len) {
     }
 
 }

@@ -43,6 +43,8 @@ public class PrimitiveServlet implements Servlet {
         PrintWriter out = res.getWriter();
         out.println("Hello, this message is from PrimitiveServlet");
         out.print("from PrimitiveServlet");
+        out.flush();
+        out.close();
     }
 
     @Override
